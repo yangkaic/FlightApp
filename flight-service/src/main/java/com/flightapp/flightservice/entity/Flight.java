@@ -1,5 +1,8 @@
 package com.flightapp.flightservice.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.Date;
@@ -21,9 +24,11 @@ public class Flight {
     private String toPlace;
 
     @Column(name = "start_date_time")
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
     private Date startDateTime;
 
     @Column(name = "end_date_time")
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
     private Date endDateTime;
 
     @OneToOne(mappedBy = "flight") // refer to "flight" attribute in "Plane" class
@@ -89,6 +94,7 @@ public class Flight {
         this.endDateTime = endDateTime;
     }
 
+    @JsonIgnore
     public Plane getPlane() {
         return plane;
     }
